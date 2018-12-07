@@ -2,25 +2,33 @@
 #include <cstring>
 
 bool is_substring(char s[], char r[]){
-	int len_s = strlen(s);
-	int len_r = strlen(r);
-
+	int i = 0;
+	int j = 0;
 	bool result = false;
 
-	for (int i = 0; i < len_s; i++){
-		for (int j = 0; j < len_r; j++){
+	while (s[i]){
+		j = 0;
+		while (r[j]){
 			if (s[i] == r[j]){ //BUG -> s[] sendo indexado errado
 				result = true;
+				i++;
+				j++;
 			}else{
 				result = false;
+				i++;
+				j++;
 				break;
 			}
 		}
-		if (result = true){
-			return true;
+		if (result == true){
+			break;
 		}
 	}
-	return false;
+	if (result == true){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 int main (){
@@ -36,7 +44,11 @@ int main (){
 	std::cout << "Insira uma possivel substring: " << std::endl;
 	std::cin >> s2;
 
-	std::cout << s2 << " eh substring de " << s1 << ": " << is_substring(s1,s2) << std::endl;
+	if (is_substring(s1,s2) == true){
+		std::cout << s2 << " eh substring de " << s1 << std::endl;
+	}else{
+		std::cout << s2 << " nao eh substring de " << s1 << std::endl;
+	}
 
 	return 0;
 }
